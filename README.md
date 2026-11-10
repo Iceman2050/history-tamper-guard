@@ -37,6 +37,32 @@ python -m pytest -v
 - The ledger is a local file — it must itself be protected (read-only share, remote copy, or hash-committed elsewhere). Ledger edits are *detected* (CHAIN_BREAK), not prevented.
 - It does not verify semantic truth of history — only that the bytes match what was notarized.
 
+## How to read a result
+
+- **EDITED / UNRECORDED / DELETED / CHAIN_BREAK** are *confirmed*
+  inconsistencies between the history store and the notarized ledger —
+  the exact turns are identified.
+- A clean **verify** means *the bytes match what was notarized* — nothing
+  more. It does not prove the history was truthful when written, and it
+  cannot detect tampering that happened before the first notarization.
+- A missing history file or ledger is an error (*inconclusive*), never a
+  pass.
+
+## Go further — evidence in production
+
+This tool notarizes one machine's agent history. Teams that need the same
+guarantee continuously — every agent action recorded in a hash-chained,
+tamper-evident trail across production systems — use
+[Agent Flight Recorder](https://flightrecorder.getingeniousai.com).
+The local notary stays fully useful on its own; the Recorder is the
+operational layer on top of the same idea.
+
+## Project status
+
+Maintained by **Ingenious AI** · License: MIT (see [LICENSE](LICENSE)) ·
+Last validated: 2026-11-10 · Security policy: [SECURITY.md](SECURITY.md) ·
+Contributions: [CONTRIBUTING.md](CONTRIBUTING.md)
+
 ## Built by Ingenious AI
 
 [DisclosureGuard](https://wa.me/5016691053?text=Hi%20Ingenious%20AI!%20I%20want%20early%20access%20to%20DisclosureGuard.)
